@@ -8,9 +8,14 @@ template <class T>
 class Message
 {
 private:	
-	string _messageTo;
-	string _messageForm;
+	User _messageTo;
+	User _messageForm;
 	T _message;
+
+public:
+	Message(User messageTo, User MessageForm, T message);
+	
+	~Message();
 
 
 };
