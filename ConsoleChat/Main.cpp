@@ -12,7 +12,8 @@
 
 auto main() -> int
 {
-	User user;
-	
+	Chat chat;
+	chat.RegUser("Andrei","Veselkov");
+
 	return 0;
 }

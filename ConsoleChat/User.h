@@ -31,4 +31,5 @@ public:
 	//Операторы
 	User& operator=(User& other);
 	User& operator=(User&& other) noexcept;
+
 };
