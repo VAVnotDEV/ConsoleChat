@@ -1,21 +1,18 @@
-#include <iostream>
-#include "Message.h"
-#include "User.h"
+#include "Chat.h"
 
-
-using namespace std;
-
+//ConsoleChat
+//1.Пользователь отправляет сообщение адресату и группе.
+//1.Регистрация
+//2.Авторизация
+//3.Выбор адресата
+//4.Отправка сообщения или Рассылка
+//5.Сохранение сообщений на время работы программы.
+//6.Выход пользователя
+//7.Выход из программы
 
 auto main() -> int
 {
-	string x;
-	string y;
-	cin >> x >> y;
-	User u(x, y);
+	User user;
 	
-
-	cout << u.getName() << " " << u.getPassword() << endl;
-
-
 	return 0;
 }

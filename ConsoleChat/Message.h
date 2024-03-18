@@ -1,21 +1,30 @@
 #pragma once
-#include <iostream>
 #include "User.h"
 
-using namespace std;
 
 template <class T>
 class Message
 {
 private:	
-	User _messageTo;
-	User _messageForm;
+	string _to;
+	string _form;
 	T _message;
 
 public:
-	Message(User messageTo, User MessageForm, T message);
-	
+	Message() = default;
+	Message(string to, string form, T message);
+	Message(const Message& other);
+	Message(const Message&& other) noexcept;
 	~Message();
 
+	string getTo() const;
+	string getForm() const;
+	T getMessage() const;
 
+	void setTo(string value);
+	void setForm(string value);
+	void setMessage(T value);
+
+	Message& operator=(const Message& other);
+	Message& operator=(const Message&& other) noexcept;
 };
