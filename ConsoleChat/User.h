@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 
+
+
 using namespace std;
 
 class User
@@ -18,7 +20,7 @@ public:
 	User(string name, string password);
 	User(const User& other);
 	User(const User&& other) noexcept;
-	~User();
+	virtual ~User();
 
 	//Гетеры
 	string getName() const;
