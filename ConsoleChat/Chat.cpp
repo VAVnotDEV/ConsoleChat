@@ -1,29 +1,25 @@
 #include "Chat.h"
 
+Chat::~Chat() {};
 
 
-void Chat::RegistrationUser(string& name, string& password)
+bool Chat::AddUser(const User& user)
 {
-
-	while(true)
-	{
-		cout << "Enter name: " << endl;
-		getline(cin, name);
 		for (int i = 0; i < _user.size(); ++i)
 		{
-			if (_user[i].getName() == name)
+			if (user.getName() == _user[i].getName())
 			{
-				cout << "Имя занято" << endl;
+				cout << "Имя занято, повторите" << endl;
+				return false;
+			
 			}
 		}
-		break;
-	}
-	cout << "Введите пароль: " << endl;
-	getline(cin, name);
-	_user.emplace_back(name, password);
+		cout << "Пользователь успешно добавлен" << endl;
+		_user.push_back(user);
+		return true;
 }
 
-bool Chat::LoginUser(string& name, string& password)
+bool Chat::LoginUser(string& name, string& password) //Вход
 {
 	for (int i = 0; i < _user.size(); ++i)
 	{
@@ -31,14 +27,14 @@ bool Chat::LoginUser(string& name, string& password)
 		{
 			return true;
 		}
-		return false;
 	}
-	
-
+	return false;
 }
 
-void Chat::listUsers()
+void Chat::listUsers() // Список контактов
 {
+	cout << "\nСписок контактов" << endl;
+
 	for (int i = 0; i < _user.size(); i++)
 	{
 		cout << i << " - " << _user[i].getName() << endl;

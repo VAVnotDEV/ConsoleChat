@@ -1,3 +1,2 @@
 ﻿  Main.cpp
-Main.obj : error LNK2019: unresolved external symbol "public: __cdecl Chat::~Chat(void)" (??1Chat@@QEAA@XZ) referenced in function main
-D:\Users\vesel\repo\ConsoleChat\x64\Debug\ConsoleChat.exe : fatal error LNK1120: 1 unresolved externals
+  ConsoleChat.vcxproj -> D:\Users\vav\ref\ConsoleChat\x64\Debug\ConsoleChat.exe

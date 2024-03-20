@@ -3,8 +3,6 @@
 #include <vector>
 #include <string>
 
-
-
 using namespace std;
 
 class User
@@ -16,8 +14,9 @@ private:
 public:
 	//Конструткоры, деструкторы
 	User() = default;
-	User(string name);
 	User(string name, string password);
+	User(string name);
+
 	User(const User& other);
 	User(const User&& other) noexcept;
 	virtual ~User();
