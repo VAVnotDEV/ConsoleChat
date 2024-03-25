@@ -9,7 +9,9 @@ public:
 
 	bool AddUser(const User& user);
 	bool LoginUser(string& login, string& password);
-	void listUsers();
+	void listUsers(const string& name);
+	void sendMessage();
+	
 
 
 private:

@@ -2,7 +2,7 @@
 
 
 //ConsoleChat
-//1.Пользователь отправляет сообщение адресату и группе.
+//1.Пользователь отправляет сообщение адресату или группе.
 //1.Регистрация
 //2.Авторизация
 //3.Выбор адресата
@@ -16,49 +16,68 @@ auto main() -> int
 	setlocale(LC_ALL, "");
 
 	Chat chat;
-	enum command {REGISTER = 1, LOGIN, SEND, MAIN_MENU,};
+	enum command { REGISTER = 1, LOGIN, SEND, SEND_ALL, MAIN_MENU, EXIT, LOGOUT };
+	string name, password;
+	int choise = 0;
 
-	string name;
-	string password;
-	User u1(name, password);
-	chat.AddUser(u1);
-		while (!chat.AddUser(u1))
+	while (choise != 6)
+	{
+		cout << "\t****Консольный чат****\n" << "1.Регистрация \n2.Вход\n3.Выход\n" << "Введите команду: ";
+		cin >> choise;
+
+		switch (choise)
 		{
-			string name;
-			string password;
-			cin >> name >> password;
-
-
-			cin >> name >> password;
+		case REGISTER: //Регистрация
+		{
+			cout << "\t/ * * Регистрация нового пользователя * */ \n"
+				<< "Придумайте логин: "; cin >> name;
+			cin.ignore();
+			cout << "Придумайте пароль: "; getline(cin, password);
+			User newUser(name, password);
+			chat.AddUser(newUser);
+			system("pause");
+			system("cls");
 		}
+		break;
 
+		case LOGIN: //Вход
+			cout << "\t/ * * Авторизация * */ \n"
+				<< "Введите логин: "; cin >> name;
+			cin.ignore();
+			cout << "Введите пароль" << endl;
+			getline(cin, password);
+			cout << name << endl;
 
-		
+			while (choise != LOGOUT) //вход
+			{
+				cout << "Выберите действие\n 3.Отправить сообщение\n 4.Рассылка\n 7.Выход\n";
+				cin >> choise;
 
-	//while (true)
-	//{
-	//	int choise = 0;
-	//	cout << "Введите команду: ";
-	//	cin >> choise;
+				switch (choise)
+				{
+				case SEND:
+					chat.listUsers(name);
+					break;
+				case SEND_ALL:
 
-	//	switch (choise)
-	//	{
-	//	case REGISTER:
-	//	{
-	//	}
+					break;
+				case LOGOUT:
+					break;
+				default:
+					cout << "Команда не выбрана\n";
+					break;
+				}
+			}
+			break;
 
-	//	break;
-	//	case LOGIN:
-	//		break;
-	//	case SEND:
-	//		break;
-	//	default:
-	//		continue;
-	//		break;
-	//	}
-	//}
-
-
+		case EXIT:
+			continue;
+			break;
+		default:
+			cout << "Команда не выбрана" << endl;
+			break;
+		}
+	}
 
 	return 0;
 }
