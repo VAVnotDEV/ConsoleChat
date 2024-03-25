@@ -1,11 +1,11 @@
 #include "Message.h"
 
 template <class T>
-Message<T>::Message(string to, string form, T message) : _to(to), _form(form), _message(message) {};
+Message<T>::Message(string from, string to, T message) : _from(from), _to(to), _message(message) {};
 template <class T>
-Message<T>::Message(const Message& other) : _to(other._to), _form(other._form), _message(other._message){}
+Message<T>::Message(const Message& other) : _from(other._from), _to(other._to), _message(other._message){}
 template <class T>
-Message<T>::Message(const Message&& other) noexcept : _to(other._to), _form(other._form), _message(other._message){}
+Message<T>::Message(const Message&& other) noexcept : _from(other._from), _to(other._to), _message(other._message){}
 template <class T>
 Message<T>::~Message() {};
 //Get
@@ -15,9 +15,9 @@ string Message<T>::getTo() const
 	return _to;
 }
 template <class T>
-string Message<T>::getForm() const
+string Message<T>::getFrom() const
 {
-	return _form;
+	return _from;
 }
 template <class T>
 T Message<T>::getMessage() const
@@ -31,9 +31,9 @@ void Message<T>::setTo(string value)
 	_to = value;
 }
 template <class T>
-void Message<T>::setForm(string value)
+void Message<T>::setFrom(string value)
 {
-	_form = value;
+	_from = value;
 }
 template <class T>
 void Message<T>::setMessage(T value)
@@ -44,8 +44,8 @@ void Message<T>::setMessage(T value)
 template <class T>
 Message<T>& Message<T>::operator=(const Message& other) 
 {
+	_from = other._from;
 	_to = other._to;
-	_form = other._form;
 	_message = other._message;
 	
 	return *this;
@@ -54,8 +54,9 @@ Message<T>& Message<T>::operator=(const Message& other)
 template <class T>
 Message<T>& Message<T>::operator=(const Message&& other) noexcept
 {
+	_from = other._from;
 	_to = other._to;
-	_form = other._form;
 	_message = other._message;
+	
 	return *this;
 }

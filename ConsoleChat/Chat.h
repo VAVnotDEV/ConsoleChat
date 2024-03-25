@@ -7,15 +7,21 @@ public:
 	Chat() = default;
 	~Chat();
 
-	bool AddUser(const User& user);
-	bool LoginUser(string& login, string& password);
+	//Добавить пользователя
+	bool addUser(const User& user); 
+	//Авторизация пользователя
+	bool loginUser(string& login, string& password);
+	//Список пользователей
 	void listUsers(const string& name);
-	void sendMessage();
+	//Отправка сообщения
+	bool sendMessage(const string& from, const string& to, const string& text);
+	//Отправка сообщения всем
+	void sendAllMessage(const string& from, const string& text);
+	//Вывод сообшений
+	void displayMessages(const string& from, const string& to);
 	
-
-
 private:
 	vector<User>_user;
-	vector<Message<string>>textMessages;
+	vector<Message<string>>_textMessages;
 
 };

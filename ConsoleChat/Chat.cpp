@@ -3,7 +3,7 @@
 Chat::~Chat() {};
 
 
-bool Chat::AddUser(const User& user)
+bool Chat::addUser(const User& user)
 {
 		for (int i = 0; i < _user.size(); ++i)
 		{
@@ -14,11 +14,13 @@ bool Chat::AddUser(const User& user)
 			}
 		}
 		cout << "Пользователь успешно добавлен" << endl;
+
 		_user.push_back(user);
+
 		return true;
 }
 
-bool Chat::LoginUser(string& name, string& password) //Вход
+bool Chat::loginUser(string& name, string& password) //Вход
 {
 	for (int i = 0; i < _user.size(); ++i)
 	{
@@ -34,7 +36,7 @@ bool Chat::LoginUser(string& name, string& password) //Вход
 
 void Chat::listUsers(const string &name) // Список контактов
 {
-	cout << "\nСписок контактов" << endl;
+	cout << "\nСписок контактов: " << endl;
 
 	for (int i = 0; i < _user.size(); i++)
 	{
@@ -44,9 +46,44 @@ void Chat::listUsers(const string &name) // Список контактов
 		}
 		cout << i << " - " << _user[i].getName() << endl;
 	}
+	cout << endl;
 }
 
-void Chat::sendMessage()
+bool Chat::sendMessage(const string& from, const string& to, const string& text)
 {
+	for (int i = 0; i < _user.size(); ++i)
+	{
+		if (_user[i].getName() == to)
+		{
+			_textMessages.push_back(Message<string>(from, to, text));
+			return true;
+		}
+	}
 
+	cout << "Сообщение не отправлено, адресат не найден" << endl;
+
+	return false;
+}
+
+void Chat::sendAllMessage(const string& from, const string& text)
+{
+	for (int i = 0; i < _user.size(); ++i)
+	{
+		if (_user[i].getName() == from)
+		{
+			continue;
+		}
+		_textMessages.push_back(Message<string>(from, _user[i].getName(), text));
+	}
+}
+
+void Chat::displayMessages(const string& from, const string& to)
+{
+	for (int i = 0; i < _textMessages.size(); ++i)
+	{
+		if (_textMessages[i].getFrom() == from && _textMessages[i].getTo() == to)
+		{
+			cout << "От " << _textMessages[i].getFrom() << " Сообщение: " << _textMessages[i].getMessage() << " К " << _textMessages[i].getTo() << endl;
+		}
+	}
 }
