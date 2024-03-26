@@ -1,4 +1,6 @@
 #include "User.h"
+
+
 //Конструкторы
 User::User(string name, string password) : _name(name), _password(password) {};
 User::User(string name) : _name(name) {};

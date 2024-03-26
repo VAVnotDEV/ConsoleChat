@@ -2,8 +2,14 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <exception>
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::exception;
+using std::string;
+using std::endl;
+using std::vector;
 
 class User
 {

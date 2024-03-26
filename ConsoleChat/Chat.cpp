@@ -5,19 +5,19 @@ Chat::~Chat() {};
 
 bool Chat::addUser(const User& user)
 {
-		for (int i = 0; i < _user.size(); ++i)
+	for (int i = 0; i < _user.size(); ++i)
+	{
+		if (user.getName() == _user[i].getName())
 		{
-			if (user.getName() == _user[i].getName())
-			{
-				cout << "Имя занято, повторите" << endl;
-				return false;
-			}
+			cout << "Имя занято, повторите" << endl;
+			return false;
 		}
-		cout << "Пользователь успешно добавлен" << endl;
+	}
+	cout << "Пользователь успешно добавлен" << endl;
 
-		_user.push_back(user);
+	_user.push_back(user);
 
-		return true;
+	return true;
 }
 
 bool Chat::loginUser(string& name, string& password) //Вход
@@ -26,15 +26,14 @@ bool Chat::loginUser(string& name, string& password) //Вход
 	{
 		if (_user[i].getName() == name && _user[i].getPassword() == password)
 		{
-			cout << "Здравствуйте, " << _user[i].getName() << endl;
 			return true;
 		}
 	}
-	cout << "Ошибка авторизации (неверный логин или  пароль)\n";
+	cout << "\nОшибка авторизации (неверный логин или  пароль)\n";
 	return false;
 }
 
-void Chat::listUsers(const string &name) // Список контактов
+void Chat::listUsers(const string& name) // Список контактов
 {
 	cout << "\nСписок контактов: " << endl;
 
@@ -53,13 +52,17 @@ bool Chat::sendMessage(const string& from, const string& to, const string& text)
 {
 	for (int i = 0; i < _user.size(); ++i)
 	{
-		if (_user[i].getName() == to)
+		if (text == "exit")
 		{
+			return false;
+		}
+		else if ( _user[i].getName() == to)
+		{
+			
 			_textMessages.push_back(Message<string>(from, to, text));
 			return true;
 		}
 	}
-
 	cout << "Сообщение не отправлено, адресат не найден" << endl;
 
 	return false;
@@ -69,7 +72,7 @@ void Chat::sendAllMessage(const string& from, const string& text)
 {
 	for (int i = 0; i < _user.size(); ++i)
 	{
-		if (_user[i].getName() == from)
+		if (_user[i].getName() == from || text == "exit")
 		{
 			continue;
 		}
@@ -77,13 +80,28 @@ void Chat::sendAllMessage(const string& from, const string& text)
 	}
 }
 
-void Chat::displayMessages(const string& from, const string& to)
+void Chat::displayAllMessages(const string& from, const string& to) const
 {
 	for (int i = 0; i < _textMessages.size(); ++i)
 	{
-		if (_textMessages[i].getFrom() == from && _textMessages[i].getTo() == to)
+		if ((from == _textMessages[i].getFrom() && to == _textMessages[i].getTo()) || (from == _textMessages[i].getTo() && to == _textMessages[i].getFrom()))
 		{
-			cout << "От " << _textMessages[i].getFrom() << " Сообщение: " << _textMessages[i].getMessage() << " К " << _textMessages[i].getTo() << endl;
+			cout << "От: " << _textMessages[i].getFrom() << " Сообщение: " << _textMessages[i].getMessage() << endl;
 		}
 	}
+}
+
+string Chat::getContact(const int index) const
+{
+	if (index < 0 || index > _user.size())
+	{
+		throw Bad_Range();
+	}
+
+	for (int i = 0; i < _user.size(); ++i)
+	{
+		return _user[index].getName();
+	}
+
+	return _user[index].getName();
 }
