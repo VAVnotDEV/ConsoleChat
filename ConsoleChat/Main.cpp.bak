@@ -19,7 +19,7 @@ auto main() -> int
 
 	while (choise != EXIT)
 	{
-		cout << "\n\t****РљРѕРЅСЃРѕР»СЊРЅС‹Р№ С‡Р°С‚****\n" << REGISTER << ".Р РµРіРёСЃС‚СЂР°С†РёСЏ\n" << LOGIN << ".Р’С…РѕРґ\n"  << EXIT << ".Р’С‹С…РѕРґ\n" << "Р’РІРµРґРёС‚Рµ РєРѕРјР°РЅРґСѓ : ";
+		cout << "\n\t****Консольный чат****\n" << REGISTER << ".Регистрация\n" << LOGIN << ".Вход\n"  << EXIT << ".Выход\n" << "Введите команду : ";
 
 		cin >> choise;
 		cin.clear();
@@ -28,12 +28,12 @@ auto main() -> int
 
 			switch (choise)
 			{
-				//Р РµРіРёСЃС‚СЂР°С†РёСЏ
+				//Регистрация
 			case REGISTER:
 			{
-				cout << "\t/ * * Р РµРіРёСЃС‚СЂР°С†РёСЏ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ * */ \n" << "РџСЂРёРґСѓРјР°Р№С‚Рµ Р»РѕРіРёРЅ: "; cin >> login;
+				cout << "\t/ * * Регистрация нового пользователя * */ \n" << "Придумайте логин: "; cin >> login;
 				cin.ignore();
-				cout << "РџСЂРёРґСѓРјР°Р№С‚Рµ РїР°СЂРѕР»СЊ: "; getline(cin, password);
+				cout << "Придумайте пароль: "; getline(cin, password);
 
 				User newUser(login, password);
 				chat.addUser(newUser);
@@ -43,41 +43,41 @@ auto main() -> int
 			}
 			break;
 
-			//РђРІС‚РѕСЂРёР·Р°С†РёСЏ
+			//Авторизация
 			case LOGIN:
-				cout << "\n\t/ * * РђРІС‚РѕСЂРёР·Р°С†РёСЏ * */ \n" << "Р’РІРµРґРёС‚Рµ Р»РѕРіРёРЅ: "; cin >> login;
-				cout << "Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ: "; cin >> password;
+				cout << "\n\t/ * * Авторизация * */ \n" << "Введите логин: "; cin >> login;
+				cout << "Введите пароль: "; cin >> password;
 
-				//РЎРµСЃСЃРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+				//Сессия пользователя
 				if (chat.loginUser(login, password))
 				{
 					while (choise != LOGOUT)
 					{
 						string text, reciever;
 						system("cls");
-						cout << "\nР—РґСЂР°РІСЃС‚РІСѓР№С‚Рµ, " << login << "!\n" << "Р’С‹Р±РµСЂРёС‚Рµ Р°РґСЂРµСЃР°С‚Р° РёР»Рё РґРµР№СЃС‚РІРёРµ\n";
+						cout << "\nЗдравствуйте, " << login << "!\n" << "Выберите адресата или действие\n";
 
 						chat.listUsers(login);
 
-						cout << SEND_ALL << ".РћС‚РїСЂР°РІРёС‚СЊ РІСЃРµРј\n" << LOGOUT << ".Р’С‹С…РѕРґ\n" << "\nР’С‹Р±РµСЂРёС‚Рµ РєРѕРјР°РЅРґСѓ: ";  cin >> choise;
+						cout << SEND_ALL << ".Отправить всем\n" << LOGOUT << ".Выход\n" << "\nВыберите команду: ";  cin >> choise;
 						cin.clear();
 						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-						if (choise == SEND_ALL)		//Р Р°СЃСЃС‹Р»РєР°
+						if (choise == SEND_ALL)		//Рассылка
 						{
 							while (text != "exit")
 							{
 								cin.ignore();
-								cout << "РЎРѕРѕР±С‰РµРЅРёРµ (РґР»СЏ РІС‹С…РѕРґР° РІРІРµРґРёС‚Рµ exit): "; cin >> text;
+								cout << "Сообщение (для выхода введите exit): "; cin >> text;
 								chat.sendAllMessage(login, text);
 								cout << login << " :" << text << endl;
 							}
 						}
-						else if (choise == LOGOUT)	//Р’С‹С…РѕРґ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+						else if (choise == LOGOUT)	//Выход пользователя
 						{
 							break;
 						}
-						else						//РћС‚РїСЂР°РІРєР° СЃРѕРѕР±С‰РµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ
+						else						//Отправка сообщения пользователю
 						{
 							try {
 								reciever = chat.getContact(choise);
@@ -85,7 +85,7 @@ auto main() -> int
 								while (text != "exit")
 								{
 									cin.ignore();
-									cout << "РЎРѕРѕР±С‰РµРЅРёРµ (РґР»СЏ РІС‹С…РѕРґР° РІРІРµРґРёС‚Рµ exit): "; cin >> text;
+									cout << "Сообщение (для выхода введите exit): "; cin >> text;
 									cout << chat.sendMessage(login, reciever, text);
 									cout << login << " :" << text << endl;
 								}
@@ -99,10 +99,10 @@ auto main() -> int
 					}
 				}
 				break;
-			case EXIT:		//Р—Р°РІРµСЂС€РµРЅРёРµ СЂР°Р±РѕС‚С‹ РїСЂРѕРіСЂР°РјРјС‹
+			case EXIT:		//Завершение работы программы
 				break;
 			default:
-				cout << "РќРµРІРµСЂРЅРѕ РІС‹Р±СЂР°РЅР° РєРѕРјР°РЅРґР°" << endl;
+				cout << "Неверно выбрана команда" << endl;
 				break;
 			}
 	}
