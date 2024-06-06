@@ -9,18 +9,18 @@ bool Chat::addUser(const User& user)
 	{
 		if (user.getName() == _user[i].getName())
 		{
-			cout << "Èìÿ çàíÿòî, ïîâòîðèòå" << endl;
+			cout << "Ð˜Ð¼Ñ Ð·Ð°Ð½ÑÑ‚Ð¾, Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚Ðµ" << endl;
 			return false;
 		}
 	}
-	cout << "Ïîëüçîâàòåëü óñïåøíî äîáàâëåí" << endl;
+	cout << "ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½" << endl;
 
 	_user.push_back(user);
 
 	return true;
 }
 
-bool Chat::loginUser(string& name, string& password) //Âõîä
+bool Chat::loginUser(string& name, string& password) //Â¬Ñ…Ð¾Ð´
 {
 	for (int i = 0; i < _user.size(); ++i)
 	{
@@ -29,13 +29,13 @@ bool Chat::loginUser(string& name, string& password) //Âõîä
 			return true;
 		}
 	}
-	cout << "\nÎøèáêà àâòîðèçàöèè (íåâåðíûé ëîãèí èëè  ïàðîëü)\n";
+	cout << "\nÐžÑˆÐ¸Ð±ÐºÐ° Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸ (Ð½ÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ Ð»Ð¾Ð³Ð¸Ð½ Ð¸Ð»Ð¸  Ð¿Ð°Ñ€Ð¾Ð»ÑŒ)\n";
 	return false;
 }
 
-void Chat::listUsers(const string& name) // Ñïèñîê êîíòàêòîâ
+void Chat::listUsers(const string& name) // â€”Ð¿Ð¸ÑÐ¾Ðº ÐºÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð¾Ð²
 {
-	cout << "\nÑïèñîê êîíòàêòîâ: " << endl;
+	cout << "\nÐ¡Ð¿Ð¸ÑÐ¾Ðº ÐºÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð¾Ð²: " << endl;
 
 	for (int i = 0; i < _user.size(); i++)
 	{
@@ -63,7 +63,7 @@ bool Chat::sendMessage(const string& from, const string& to, const string& text)
 			return true;
 		}
 	}
-	cout << "Ñîîáùåíèå íå îòïðàâëåíî, àäðåñàò íå íàéäåí" << endl;
+	cout << "Ð¡Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð½Ðµ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾, Ð°Ð´Ñ€ÐµÑÐ°Ñ‚ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½" << endl;
 
 	return false;
 }
@@ -86,7 +86,7 @@ void Chat::displayAllMessages(const string& from, const string& to) const
 	{
 		if ((from == _textMessages[i].getFrom() && to == _textMessages[i].getTo()) || (from == _textMessages[i].getTo() && to == _textMessages[i].getFrom()))
 		{
-			cout << "Îò: " << _textMessages[i].getFrom() << " Ñîîáùåíèå: " << _textMessages[i].getMessage() << endl;
+			cout << "ÑœÑ‚: " << _textMessages[i].getFrom() << " â€”Ð¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ: " << _textMessages[i].getMessage() << endl;
 		}
 	}
 }
