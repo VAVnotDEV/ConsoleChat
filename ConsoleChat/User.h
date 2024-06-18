@@ -18,7 +18,7 @@ private:
 	string _password;
 
 public:
-	//Конструткоры, деструкторы
+	//РљРѕРЅСЃС‚СЂСѓС‚РєРѕСЂС‹, РґРµСЃС‚СЂСѓРєС‚РѕСЂС‹
 	User() = default;
 	User(string name, string password);
 	User(string name);
@@ -27,15 +27,15 @@ public:
 	User(const User&& other) noexcept;
 	virtual ~User();
 
-	//Гетеры
+	//Р“РµС‚РµСЂС‹
 	string getName() const;
 	string getPassword() const;
 
-	//Сетеры
+	//РЎРµС‚РµСЂС‹
 	void setName( string name);
 	void setPassword( string password);
 	
-	//Операторы
+	//РћРїРµСЂР°С‚РѕСЂС‹
 	User& operator=(User& other);
 	User& operator=(User&& other) noexcept;
 

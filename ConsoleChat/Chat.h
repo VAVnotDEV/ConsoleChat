@@ -8,19 +8,19 @@ public:
 	Chat() = default;
 	~Chat();
 
-	//Добавить пользователя
+	//Р”РѕР±Р°РІРёС‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 	bool addUser(const User& user); 
-	//Авторизация пользователя
+	//РђРІС‚РѕСЂРёР·Р°С†РёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 	bool loginUser(string& login, string& password);
-	//Список пользователей
+	//РЎРїРёСЃРѕРє РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
 	void listUsers(const string& name);
-	//Отправка сообщения
+	//РћС‚РїСЂР°РІРєР° СЃРѕРѕР±С‰РµРЅРёСЏ
 	bool sendMessage(const string& from, const string& to, const string& text);
-	//Отправка сообщения всем
+	//РћС‚РїСЂР°РІРєР° СЃРѕРѕР±С‰РµРЅРёСЏ РІСЃРµРј
 	void sendAllMessage(const string& from, const string& text);
-	//Вывод сообшений
+	//Р’С‹РІРѕРґ СЃРѕРѕР±С€РµРЅРёР№
 	void displayAllMessages(const string& from, const string& to) const;
-	//Выбор адресата
+	//Р’С‹Р±РѕСЂ Р°РґСЂРµСЃР°С‚Р°
 	string getContact(const int index) const;
 	
 private:
@@ -29,7 +29,7 @@ private:
 
 };
 
-//Выход за границы массива
+//Р’С‹С…РѕРґ Р·Р° РіСЂР°РЅРёС†С‹ РјР°СЃСЃРёРІР°
 class Bad_Range : public exception
 {
 public:
