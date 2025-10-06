@@ -1,102 +1,102 @@
-#include "Chat.h"
-
-Chat::~Chat() {};
+﻿#include "Chat.h"
 
 
+//Регистрация пользователя
 bool Chat::addUser(const User& user)
 {
-	for (int i = 0; i < _user.size(); ++i)
-	{
-		if (user.getName() == _user[i].getName())
+	for (const User& u : _user)
+		if (user.getName() == u.getName())
 		{
-			cout << "Имя занято, повторите" << endl;
+			std::cout << "Имя занято, повторите" << std::endl;
+
 			return false;
 		}
-	}
-	cout << "Пользователь успешно добавлен" << endl;
+
+	std::cout << "Пользователь успешно добавлен" << std::endl;
 
 	_user.push_back(user);
 
 	return true;
 }
-
-bool Chat::loginUser(const string& name, const string& password) //¬ход
+//Авторизация
+bool Chat::loginUser(const std::string& name, const std::string& password) 
 {
-	for (int i = 0; i < _user.size(); ++i)
+	if (validateUser(name, password))
+		return true;
+
+	std::cout << "\nОшибка авторизации (неверный логин или  пароль)\n";
+	return false;
+}
+//Список контактов
+void Chat::listUsers(const std::string& name) 
+{
+	std::cout << "\nСписок контактов: " << std::endl;
+	int count = 0;
+	for(const User& u : _user)
 	{
-		if (_user[i].getName() == name && _user[i].getPassword() == password)
+		if (u.getName() == name)
+			continue;
+		count++;
+		std::cout << count << " - " << u.getName() << std::endl;
+	}
+	std::cout << std::endl;
+}
+//Отправка конкретному пользователю
+bool Chat::sendMessage(const std::string& from, const std::string& to, const std::string& text)
+{
+	if (text == "exit")
+	{
+		return false;
+	}
+
+	for (const User& u : _user)
+	{
+		if (u.getName() == to)
 		{
+			_textMessages.emplace_back(from, to, text);
 			return true;
 		}
 	}
-	cout << "\nОшибка авторизации (неверный логин или  пароль)\n";
+	std::cout << "Собщение не отправлено, адресат не найден" << std::endl;
+
 	return false;
 }
-
-void Chat::listUsers(const string& name) // —писок контактов
+//Рассылка
+void Chat::sendAllMessage(const std::string& from, const std::string& text)
 {
-	cout << "\nСписок контактов: " << endl;
-
-	for (int i = 0; i < _user.size(); i++)
+	if (text == "exit")
+		return;
+	
+	for (const User& u : _user)
 	{
-		if (_user[i].getName() == name)
-		{
+		if (u.getName() == from)
 			continue;
-		}
-		cout << i << " - " << _user[i].getName() << endl;
+
+		_textMessages.emplace_back(from, u.getName(), text);
 	}
-	cout << endl;
 }
 
-bool Chat::sendMessage(const string& from, const string& to, const string& text)
+void Chat::displayAllMessages(const std::string& from, const std::string& to) const
 {
-	for (int i = 0; i < _user.size(); ++i)
+	for(const Message<std::string>& m : _textMessages)
 	{
-		if (text == "exit")
+		if ((from == m.getFrom() && to == m.getTo()) || (from == m.getTo() && to == m.getFrom()))
 		{
-			return false;
+			std::cout << "От: " << m.getFrom() << " Сообщение: " << m.getMessage() << std::endl;
 		}
-		else if ( _user[i].getName() == to)
-		{
+	}
+}
+
+std::string Chat::getContact(const int index) const
+{
+	return _user.at(index).getName();
+}
+
+bool Chat::validateUser(const std::string& name, const std::string& password) const
+{
+	for ( const User& u : _user)
+			if (u.getName() == name && u.getPassword() == password)
+				return true;
 			
-			_textMessages.push_back(Message<string>(from, to, text));
-			return true;
-		}
-	}
-	cout << "Собщение не отправлено, адресат не найден" << endl;
-
 	return false;
-}
-
-void Chat::sendAllMessage(const string& from, const string& text)
-{
-	for (int i = 0; i < _user.size(); ++i)
-	{
-		if (_user[i].getName() == from || text == "exit")
-		{
-			continue;
-		}
-		_textMessages.push_back(Message<string>(from, _user[i].getName(), text));
-	}
-}
-
-void Chat::displayAllMessages(const string& from, const string& to) const
-{
-	for (int i = 0; i < _textMessages.size(); ++i)
-	{
-		if ((from == _textMessages[i].getFrom() && to == _textMessages[i].getTo()) || (from == _textMessages[i].getTo() && to == _textMessages[i].getFrom()))
-		{
-			cout << "ќт: " << _textMessages[i].getFrom() << " —ообщение: " << _textMessages[i].getMessage() << endl;
-		}
-	}
-}
-
-string Chat::getContact(const int index) const
-{
-	if (index < 0 || index > _user.size())
-	{
-		throw Bad_Range();
-	}
-
-	return _user[index].getName();
 }
