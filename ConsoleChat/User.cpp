@@ -6,7 +6,6 @@ User::User(const std::string& name,const std::string& password) : _name(name), _
 User::User(const std::string& name) : _name(name) {};
 User::User(const User& other) : _name(other._name), _password(other._password){}
 User::User(User&& other) noexcept : _name(move(other._name)), _password(move(other._password)) {}
-User::~User(){}
 
 //Гетеры
 std::string User::getName() const { return _name; }

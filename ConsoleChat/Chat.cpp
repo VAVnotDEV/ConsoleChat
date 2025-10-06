@@ -5,7 +5,7 @@
 bool Chat::addUser(const User& user)
 {
 	for (const User& u : _user)
-		if (user.getName() == u.getName())
+		if (validateUser(user))
 		{
 			std::cout << "Имя занято, повторите" << std::endl;
 
@@ -79,12 +79,8 @@ void Chat::sendAllMessage(const std::string& from, const std::string& text)
 void Chat::displayAllMessages(const std::string& from, const std::string& to) const
 {
 	for(const Message<std::string>& m : _textMessages)
-	{
 		if ((from == m.getFrom() && to == m.getTo()) || (from == m.getTo() && to == m.getFrom()))
-		{
 			std::cout << "От: " << m.getFrom() << " Сообщение: " << m.getMessage() << std::endl;
-		}
-	}
 }
 
 std::string Chat::getContact(const int index) const
@@ -98,5 +94,14 @@ bool Chat::validateUser(const std::string& name, const std::string& password) co
 			if (u.getName() == name && u.getPassword() == password)
 				return true;
 			
+	return false;
+}
+
+bool Chat::validateUser(const User& user) const
+{
+	for (const User& u : _user)
+		if (u.getName() == user.getName())
+			return true;
+
 	return false;
 }

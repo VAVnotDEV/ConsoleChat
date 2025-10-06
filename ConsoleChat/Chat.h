@@ -25,6 +25,7 @@ public:
 	//Выбор адресата
 	std::string getContact(const int index) const;
 	bool validateUser(const std::string& name, const std::string& password) const;
+	bool validateUser(const User& user) const;
 
 	
 private:
