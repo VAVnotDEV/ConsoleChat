@@ -5,7 +5,7 @@ Message<T>::Message(string from, string to, T message) : _from(from), _to(to), _
 template <class T>
 Message<T>::Message(const Message& other) : _from(other._from), _to(other._to), _message(other._message){}
 template <class T>
-Message<T>::Message(const Message&& other) noexcept : _from(other._from), _to(other._to), _message(other._message){}
+Message<T>::Message(const Message&& other) noexcept : _from(move(other._from)), _to(move(other._to)), _message(move(other._message)){}
 template <class T>
 Message<T>::~Message() {};
 //Get
@@ -54,9 +54,9 @@ Message<T>& Message<T>::operator=(const Message& other)
 template <class T>
 Message<T>& Message<T>::operator=(const Message&& other) noexcept
 {
-	_from = other._from;
-	_to = other._to;
-	_message = other._message;
+	_from = move(other._from);
+	_to = move(other._to);
+	_message = move(other._message);
 	
 	return *this;
 }

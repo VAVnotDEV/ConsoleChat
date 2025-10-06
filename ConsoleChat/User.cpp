@@ -2,31 +2,19 @@
 
 
 //Конструкторы
-User::User(string name, string password) : _name(name), _password(password) {};
-User::User(string name) : _name(name) {};
+User::User(const string& name,const string& password) : _name(name), _password(password) {};
+User::User(const string& name) : _name(name) {};
 User::User(const User& other) : _name(other._name), _password(other._password){}
-User::User(const User&& other) noexcept : _name(other._name), _password(other._password) {}
+User::User(User&& other) noexcept : _name(move(other._name)), _password(move(other._password)) {}
 User::~User(){}
 
 //Гетеры
-string User::getName() const
-{
-	return _name;
-}
-string User::getPassword() const
-{
-	return _password;
-}
+string User::getName() const { return _name; }
+string User::getPassword() const { return _password; }
 
 //Сетеры
-void User::setName(string name)
-{
-	_name = name;
-}
-void User::setPassword(string password)
-{
-	_password = password;
-}
+void User::setName(string name) { _name = name; }
+void User::setPassword(string password) { _password = password; }
 
 //Операторы
 User& User::operator=(User& other)
@@ -37,8 +25,8 @@ User& User::operator=(User& other)
 }
 User& User::operator=(User&& other) noexcept
 {
-	_name = other._name;
-	_password = other._password;
+	_name = move(other._name);
+	_password = move(other._password);
 	return *this;
 }
 

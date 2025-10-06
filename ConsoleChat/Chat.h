@@ -11,7 +11,7 @@ public:
 	//Добавить пользователя
 	bool addUser(const User& user); 
 	//Авторизация пользователя
-	bool loginUser(string& login, string& password);
+	bool loginUser(const string& login, const string& password);
 	//Список пользователей
 	void listUsers(const string& name);
 	//Отправка сообщения

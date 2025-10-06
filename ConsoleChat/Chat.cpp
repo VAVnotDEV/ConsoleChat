@@ -20,7 +20,7 @@ bool Chat::addUser(const User& user)
 	return true;
 }
 
-bool Chat::loginUser(string& name, string& password) //¬ход
+bool Chat::loginUser(const string& name, const string& password) //¬ход
 {
 	for (int i = 0; i < _user.size(); ++i)
 	{
@@ -96,11 +96,6 @@ string Chat::getContact(const int index) const
 	if (index < 0 || index > _user.size())
 	{
 		throw Bad_Range();
-	}
-
-	for (int i = 0; i < _user.size(); ++i)
-	{
-		return _user[index].getName();
 	}
 
 	return _user[index].getName();

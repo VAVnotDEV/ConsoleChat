@@ -20,11 +20,11 @@ private:
 public:
 	//Конструткоры, деструкторы
 	User() = default;
-	User(string name, string password);
-	User(string name);
+	User(const string& name, const string& password);
+	User(const string& name);
 
 	User(const User& other);
-	User(const User&& other) noexcept;
+	User(User&& other) noexcept;
 	virtual ~User();
 
 	//Гетеры
@@ -32,8 +32,8 @@ public:
 	string getPassword() const;
 
 	//Сетеры
-	void setName( string name);
-	void setPassword( string password);
+	void setName(string name);
+	void setPassword(string password);
 	
 	//Операторы
 	User& operator=(User& other);
